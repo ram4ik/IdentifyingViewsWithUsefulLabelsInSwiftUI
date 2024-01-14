@@ -26,16 +26,21 @@ struct ContentView: View {
     @State private var selectedPicture = Int.random(in: 0...3)
     
     var body: some View {
-        Button {
-            selectedPicture = Int.random(in: 0...3)
-        } label: {
-            Image(systemName: pictures[selectedPicture])
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .foregroundStyle(.mint)
+        VStack {
+            Button {
+                selectedPicture = Int.random(in: 0...3)
+            } label: {
+                Image(systemName: pictures[selectedPicture])
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .foregroundStyle(.mint)
+                    .accessibilityHidden(true) // Hidden from accessibility
+            }
+            .accessibilityLabel(labels[selectedPicture])
         }
-        .accessibilityLabel(labels[selectedPicture])
+        .accessibilityElement(children: .ignore) // Children will be ignored
+        .accessibilityLabel("This is a button for switch animal pictures")
     }
 }
 
